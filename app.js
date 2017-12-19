@@ -30,11 +30,24 @@ let User = require('./models/user');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+// Set Public Folder
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Home route
 app.get('/', (req, res) => {
   res.render('index', {
     title: 'Social'
   });
+});
+
+// Login route
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+// Register route
+app.get('/register', (req, res) => {
+  res.render('register');
 });
 
 // Start server

@@ -5,10 +5,18 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     title #{title}
-    // bootstrap css cdn
-    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
-    // google font cdn
-    link(href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
+    // Bootstrap 3.3.7
+    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+    // Font Awesome
+    link(rel='stylesheet', href='/bower_components/font-awesome/css/font-awesome.min.css')
+    // Ionicons
+    link(rel='stylesheet', href='/bower_components/Ionicons/css/ionicons.min.css')
+    // admin-lte Theme style
+    link(rel='stylesheet', href='/dist/css/AdminLTE.css')
+    // custom css
+    link(rel='stylesheet', href='/dist/css/styles.css')
+    // Google Font
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900')
   body
     h1 #{title}
 

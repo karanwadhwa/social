@@ -1,0 +1,49 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title Social | Log in
+    // Tell the browser to be responsive to screen width
+    meta(content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no', name='viewport')
+    // Bootstrap 3.3.7
+    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+    // Font Awesome
+    link(rel='stylesheet', href='/bower_components/font-awesome/css/font-awesome.min.css')
+    // Ionicons
+    link(rel='stylesheet', href='/bower_components/Ionicons/css/ionicons.min.css')
+    // admin-lte Theme style
+    link(rel='stylesheet', href='/dist/css/AdminLTE.css')
+    // custom css
+    link(rel='stylesheet', href='/dist/css/styles.css')
+    // Google Font
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900')
+
+
+  body.hold-transition.login-page
+    .login-box.flex-container
+      .login-logo
+          b Social
+          | Login
+      // /.login-logo
+      .login-box-body
+        p.login-box-msg Sign in to start your session
+        form(action='../../index2.html', method='post')
+          .form-group.has-feedback
+            input.form-control(type='email', placeholder='Email')
+            span.glyphicon.glyphicon-envelope.form-control-feedback
+          .form-group.has-feedback
+            input.form-control(type='password', placeholder='Password')
+            span.glyphicon.glyphicon-lock.form-control-feedback
+          .row
+            .col-xs-8
+            .col-xs-4
+              button.btn.btn-primary.btn-block.btn-flat(type='submit') Sign In
+        a(href='#') Forgot Password
+        br
+        a.text-center(href='/register') Register
+
+    // jQuery 3
+    script(src='/bower_components/jquery/dist/jquery.min.js')
+    // Bootstrap 3.3.7
+    script(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
