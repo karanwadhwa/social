@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/karanwadhwa/social/issues"
   },
-  "homepage": "https://github.com/karanwadhwa/social#readme"
+  "homepage": "https://github.com/karanwadhwa/social#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "mongoose": "^4.13.7",
+    "pug": "^2.0.0-rc.4"
+  }
 }
