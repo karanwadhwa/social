@@ -7,12 +7,13 @@ const flash = require('connect-flash');
 const expressValidator = require('express-validator');
 
 const variables = require('./variables');
+const config = require('./config/database');
 
 // Mongo connection
 // changed mongoose.connect('blahblah') to connection.openUri('blahblah') because of a deprecationWarning
 // check this thread for more info  https://github.com/Automattic/mongoose/issues/5399
 // lol switched it back to connect and added useMongoClient no idea what it does but gets rid of the warning
-mongoose.connect('mongodb://localhost/social', {useMongoClient: true});
+mongoose.connect(config.database, {useMongoClient: true});
 let db = mongoose.connection;
 
 // Check db connection

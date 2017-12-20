@@ -9,20 +9,21 @@ const variables = require('../variables');
 // Import User Model
 let User = require('../models/user');
 
-// Login route
+// Login GET route
 router.get('/login', (req, res) => {
   res.render('login', {
     title: variables.title
   });
 });
 
-// Register route
+// Register GET route
 router.get('/register', (req, res) => {
   res.render('register', {
     title: variables.title
   });
 });
 
+// Register POST route
 router.post('/register', (req, res) => {
   req.checkBody('fname', 'Please enter your Name').notEmpty();
   req.checkBody('lname', 'Please enter your Name').notEmpty();
