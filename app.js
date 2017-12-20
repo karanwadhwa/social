@@ -1,9 +1,10 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const variables = require('./variables');
 
 // Mongo connection
-// changed mongoose.connect('blahblahblah') to connection.openUri because of a deprecationWarning
+// changed mongoose.connect('blahblah') to connection.openUri('blahblah') because of a deprecationWarning
 // check this thread for more info  https://github.com/Automattic/mongoose/issues/5399
 // lol switched it back to connect and added useMongoClient no idea what it does but gets rid of the warning
 mongoose.connect('mongodb://localhost/social', {useMongoClient: true});
@@ -36,19 +37,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Home route
 app.get('/', (req, res) => {
   res.render('index', {
-    title: 'Social'
+    title: variables.title
   });
 });
 
-// Login route
-app.get('/login', (req, res) => {
-  res.render('login');
-});
+// Route Files
+const authRoute = require('./routes/auth');
 
-// Register route
-app.get('/register', (req, res) => {
-  res.render('register');
-});
+app.use('/auth', authRoute);
 
 // Start server
 app.listen(port, () => {

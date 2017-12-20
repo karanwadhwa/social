@@ -23,25 +23,23 @@ html
   body.hold-transition.login-page
     .login-box.flex-container
       .login-logo
-          b Social
+          b #{title}
           | Login
       // /.login-logo
       .login-box-body
         p.login-box-msg Sign in to start your session
-        form(action='../../index2.html', method='post')
+        form(action='/login', method='POST')
           .form-group.has-feedback
             input.form-control(type='email', placeholder='Email')
             span.glyphicon.glyphicon-envelope.form-control-feedback
           .form-group.has-feedback
             input.form-control(type='password', placeholder='Password')
             span.glyphicon.glyphicon-lock.form-control-feedback
-          .row
-            .col-xs-8
-            .col-xs-4
-              button.btn.btn-primary.btn-block.btn-flat(type='submit') Sign In
+          button.btn.btn-primary.btn-block.btn-flat(type='submit') Sign In
+        br
         a(href='#') Forgot Password
         br
-        a.text-center(href='/register') Register
+        a.text-center(href='/auth/register') Register
 
     // jQuery 3
     script(src='/bower_components/jquery/dist/jquery.min.js')

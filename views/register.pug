@@ -23,12 +23,12 @@ html
   body.hold-transition.register-page
     .register-box.flex-container
       .register-logo
-          b Social
+          b #{title}
           | Register
       // /.login-logo
       .register-box-body
         p.login-box-msg
-        form(action='../../index2.html', method='post')
+        form(action='/register', method='POST')
           .form-group.has-feedback
             input.form-control(type='text', placeholder='First Name')
             span.glyphicon.glyphicon-user.form-control-feedback
@@ -47,13 +47,12 @@ html
           .form-group.has-feedback
             input.form-control(type='password', placeholder='Confirm Password')
             span.glyphicon.glyphicon-log-in.form-control-feedback
-          .row
-            .col-xs-8
-            .col-xs-4
-              button.btn.btn-primary.btn-block.btn-flat(type='submit') Sign In
-        a(href='#') Forgot Password
+
+          button.btn.btn-primary.btn-block.btn-flat(type='submit') Register
+
         br
-        a.text-center(href='/register') Register
+        p Have an Account? &nbsp
+          a.text-center(href='/auth/login') Login
 
     // jQuery 3
     script(src='/bower_components/jquery/dist/jquery.min.js')
