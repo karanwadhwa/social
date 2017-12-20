@@ -21,31 +21,40 @@ html
 
 
   body.hold-transition.register-page
+    if errors
+      .message
+        div(class = 'alert alert-dismissible alert-danger')
+          button.close(type='button', data-dismiss='alert', aria-hidden='true') ×
+          h4
+            i.icon.fa.fa-warning
+            | Error!
+          |  #{errors[0].msg}
+
     .register-box.flex-container
       .register-logo
           b #{title}
           | Register
-      // /.login-logo
+
       .register-box-body
         p.login-box-msg
-        form(action='/register', method='POST')
+        form(action='/auth/register', method='POST')
           .form-group.has-feedback
-            input.form-control(type='text', placeholder='First Name')
+            input.form-control(type='text' placeholder='First Name' name='fname' required)
             span.glyphicon.glyphicon-user.form-control-feedback
           .form-group.has-feedback
-            input.form-control(type='text', placeholder='Last Name')
+            input.form-control(type='text' placeholder='Last Name' name='lname' required)
             span.glyphicon.glyphicon-user.form-control-feedback
           .form-group.has-feedback
-            input.form-control(type='email', placeholder='Email')
+            input.form-control(type='email' placeholder='Email' name='email' required)
             span.glyphicon.glyphicon-envelope.form-control-feedback
           .form-group.has-feedback
-            input.form-control(type='number', placeholder='Registration No.', min="10000" max="99999")
+            input.form-control(type='number' placeholder='Registration No.' name='reg' required)
             span.glyphicon.glyphicon-tag.form-control-feedback
           .form-group.has-feedback
-            input.form-control(type='password', placeholder='Password')
+            input.form-control(type='password' placeholder='Password' name='password' required)
             span.glyphicon.glyphicon-lock.form-control-feedback
           .form-group.has-feedback
-            input.form-control(type='password', placeholder='Confirm Password')
+            input.form-control(type='password' placeholder='Confirm Password' name='password2' required)
             span.glyphicon.glyphicon-log-in.form-control-feedback
 
           button.btn.btn-primary.btn-block.btn-flat(type='submit') Register
@@ -58,3 +67,5 @@ html
     script(src='/bower_components/jquery/dist/jquery.min.js')
     // Bootstrap 3.3.7
     script(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
+    // Custom js
+    script(src='/dist/js/index.js')

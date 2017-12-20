@@ -4,3 +4,18 @@
   justify-content: center;
   height: 85vh;
 }
+
+.message {
+  position: absolute;
+  display: inline-block;
+  top: 0px;
+  right: 0px;
+  width: 450px;
+  padding: 15px;
+}
+
+@media (max-width: 600px) {
+  .message {
+    width: 100%;
+  }
+}

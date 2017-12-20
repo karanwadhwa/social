@@ -1,0 +1,9 @@
+.messages
+  each type in Object.keys(messages)
+    each message in messages[type]
+      .message
+        div(class = 'alert alert-dismissible alert-'+type)
+          button.close(type='button', data-dismiss='alert', aria-hidden='true') ×
+          h4
+            i.icon.fa.fa-check
+          |  #{message}

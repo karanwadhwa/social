@@ -21,6 +21,14 @@ html
 
 
   body.hold-transition.login-page
+    !=messages('message', locals)
+    if errors
+      .message
+        div(class = 'alert alert-dismissible alert-danger')
+          button.close(type='button', data-dismiss='alert', aria-hidden='true') ×
+          h4 Error!
+            i.icon.fa.fa-warning
+            |  #{error.msg}
     .login-box.flex-container
       .login-logo
           b #{title}
@@ -45,3 +53,5 @@ html
     script(src='/bower_components/jquery/dist/jquery.min.js')
     // Bootstrap 3.3.7
     script(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
+    // Custom js
+    script(src='/dist/js/index.js')
