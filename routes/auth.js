@@ -1,7 +1,10 @@
 // Router file for login and registration
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
+
 const variables = require('../variables');
+
 
 // Import User Model
 let User = require('../models/user');
@@ -27,7 +30,7 @@ router.post('/register', (req, res) => {
   req.checkBody('reg', 'Please enter a valid Registration id').notEmpty().isLength({min:5, max:5});
   req.checkBody('password', 'Please enter a password').notEmpty();
   req.checkBody('password', 'A minimum password length of 6 characters is required').notEmpty().isLength({min:6});
-  req.checkBody('password2', 'Your Passwords do not match').notEmpty().equals(req.body.password);
+  req.checkBody('password2', 'Your Passwords do not match').equals(req.body.password);
 
   // Get errors
   var errors = req.validationErrors();
@@ -38,22 +41,34 @@ router.post('/register', (req, res) => {
       errors: errors
     });
   } else {
-    var user = new User();
-    user.fname = req.body.fname;
-    user.lname = req.body.lname;
-    user.email = req.body.email;
-    user.reg = req.body.reg;
-    user.password = req.body.password;
 
-    user.save((err) => {
-      if(err) {
-        console.log(err);
-        return;
-      } else {
-        req.flash('success', 'Registration Successful, Please Login');
-        res.redirect('/auth/login');
-      }
+    var user = new User({
+      fname : req.body.fname,
+      lname : req.body.lname,
+      email : req.body.email,
+      reg : req.body.reg,
+      password : req.body.password
     });
+
+    // Hash Password before saving
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(user.password, salt, (err, hash) => {
+        if (err) {
+          console.log(err);
+        }
+        user.password = hash;
+        user.save((err) => {
+          if(err) {
+            console.log(err);
+            return;
+          } else {
+            req.flash('success', 'Registration Successful, Please Login');
+            res.redirect('/auth/login');
+          }
+        });
+      });
+    });
+
   }
 });
 
