@@ -44,23 +44,31 @@ router.post('/register', (req, res) => {
   req.checkBody('password', 'A minimum password length of 6 characters is required').notEmpty().isLength({min:6});
   req.checkBody('password2', 'Your Passwords do not match').equals(req.body.password);
 
-  // Get errors
+  // Generate newUser
+  // fname, lname and email are converted to lowercase
+  // before being pushed to the database
+  var newUser = new User({
+    fname : (req.body.fname).toLowerCase(),
+    lname : (req.body.lname).toLowerCase(),
+    email : (req.body.email).toLowerCase(),
+    reg : req.body.reg,
+    password : req.body.password
+  });
+
+  // Get validationErrors
   var errors = req.validationErrors();
   //console.log(errors);
   // Check for an existing user
-  let regQuery = {"reg":req.body.reg};
-  let emailQuery = {"email":req.body.email};
-
   // First Check for an existing user with email
-  emailFlag = User.findOne(emailQuery, function(err, user){
+  User.findOne({email:newUser.email}, function(err, user){
     if(err) throw err;
     if(user){
       var emailError = [{
         param: 'email',
-        msg: 'A User with that email id already exists. In the event of a lost Password click on "Forgot Password" on the Login page or contact the Administrator',
-        value:  user.email
+        msg: 'A User with that Email id already exists. In the event of a lost Password click on "Forgot Password" on the Login page or contact the Administrator',
+        value:  newUser.email
       }]
-      // if the email exists re-render the page with error
+      // if reg no exists re-render the page with error
       res.render('register', {
         title: variables.title,
         errors: emailError
@@ -68,13 +76,13 @@ router.post('/register', (req, res) => {
     }else {
       // if email does not exist check for reg no
       // Second Check for an existing user with reg no
-      regFlag = User.findOne(regQuery, function(err, user){
+      User.findOne({reg:newUser.reg}, function(err, user){
         if(err) throw err;
         if(user){
           var regError = [{
             param: 'reg',
             msg: 'A User with that Registration ID already exists. In the event of a lost Password click on "Forgot Password" on the Login page or contact the Administrator',
-            value:  req.body.reg
+            value:  newUser.reg
           }]
           // if reg no exists re-render the page with error
           res.render('register', {
@@ -92,17 +100,7 @@ router.post('/register', (req, res) => {
             });
           }else {
             // Once all error checking is finished
-            //it finally moves to storing the user to the db
-            // fname, lname and email are converted to lowercase
-            //before being pushed to the database
-            var user = new User({
-              fname : (req.body.fname).toLowerCase(),
-              lname : (req.body.lname).toLowerCase(),
-              email : (req.body.email).toLowerCase(),
-              reg : req.body.reg,
-              password : req.body.password
-            });
-
+            // newUser can finally be added to the db
             // Hash Password before saving
             bcrypt.genSalt(10, (err, salt) => {
               bcrypt.hash(user.password, salt, (err, hash) => {
@@ -110,9 +108,9 @@ router.post('/register', (req, res) => {
                   console.log(err);
                 }
                 // password value is changed to hash
-                user.password = hash;
-                // new user is saved with password = hash
-                user.save((err) => {
+                newUser.password = hash;
+                // newUser is saved with password = hash
+                newUser.save((err) => {
                   if(err) {
                     console.log(err);
                     return;
