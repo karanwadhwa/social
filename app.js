@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const flash = require('connect-flash');
 const expressValidator = require('express-validator');
+const passport = require('passport');
 
 const variables = require('./variables');
 const config = require('./config/database');
@@ -78,6 +79,13 @@ app.use(expressValidator({
     };
   }
 }));
+
+// Passport Config
+require('./config/passport')(passport);
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // Home route
 app.get('/', (req, res) => {

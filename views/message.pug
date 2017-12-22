@@ -4,7 +4,12 @@
       .message
         div(class = 'alert alert-dismissible alert-'+type)
           button.close(type='button', data-dismiss='alert', aria-hidden='true') ×
-          h4
-            i.icon.fa.fa-check
-            |Success
+          if type == 'error'
+            h4
+              i.icon.fa.fa-warning
+              |Error!
+          if type == 'success'
+            h4
+              i.icon.fa.fa-check
+              |Success
           |  #{message}

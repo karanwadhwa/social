@@ -1,6 +1,8 @@
 // Project Title
 const variables = {
-  title : 'Social'
+  title : 'Social',
+  usernameField: 'reg',
+  passwordField: 'password'
 }
 
 module.exports = variables;
