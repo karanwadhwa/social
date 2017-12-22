@@ -60,11 +60,13 @@ router.post('/register', (req, res) => {
         msg: 'A User with that email id already exists. In the event of a lost Password click on "Forgot Password" on the Login page or contact the Administrator',
         value:  user.email
       }]
+      // if the email exists re-render the page with error
       res.render('register', {
         title: variables.title,
         errors: emailError
       });
     }else {
+      // if email does not exist check for reg no
       // Second Check for an existing user with reg no
       regFlag = User.findOne(regQuery, function(err, user){
         if(err) throw err;
@@ -74,22 +76,29 @@ router.post('/register', (req, res) => {
             msg: 'A User with that Registration ID already exists. In the event of a lost Password click on "Forgot Password" on the Login page or contact the Administrator',
             value:  req.body.reg
           }]
+          // if reg no exists re-render the page with error
           res.render('register', {
             title: variables.title,
             errors: regError
           });
         } else {
+          // since neither email nor reg no exist in the db
+          //it now checks for validationErrors from #48
           if(errors) {
+            // if there are any validation errors they are stored in var errors and page re-renders
             res.render('register', {
               title: variables.title,
               errors: errors
             });
           }else {
-
+            // Once all error checking is finished
+            //it finally moves to storing the user to the db
+            // fname, lname and email are converted to lowercase
+            //before being pushed to the database
             var user = new User({
-              fname : req.body.fname,
-              lname : req.body.lname,
-              email : req.body.email,
+              fname : (req.body.fname).toLowerCase(),
+              lname : (req.body.lname).toLowerCase(),
+              email : (req.body.email).toLowerCase(),
               reg : req.body.reg,
               password : req.body.password
             });
@@ -100,7 +109,9 @@ router.post('/register', (req, res) => {
                 if (err) {
                   console.log(err);
                 }
+                // password value is changed to hash
                 user.password = hash;
+                // new user is saved with password = hash
                 user.save((err) => {
                   if(err) {
                     console.log(err);

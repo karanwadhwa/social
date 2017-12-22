@@ -40,13 +40,13 @@ html
         p.login-box-msg
         form(action='/auth/register', method='POST')
           .form-group.has-feedback
-            input.form-control(type='text' placeholder='First Name' name='fname' required)
+            input.form-control(type='text' placeholder='First Name' name='fname' style='text-transform: lowercase' required)
             span.glyphicon.glyphicon-user.form-control-feedback
           .form-group.has-feedback
-            input.form-control(type='text' placeholder='Last Name' name='lname' required)
+            input.form-control(type='text' placeholder='Last Name' name='lname' style='text-transform: lowercase' required)
             span.glyphicon.glyphicon-user.form-control-feedback
           .form-group.has-feedback
-            input.form-control(type='email' placeholder='Email' name='email' required)
+            input.form-control(type='email' placeholder='Email' name='email' style='text-transform: lowercase' required)
             span.glyphicon.glyphicon-envelope.form-control-feedback
           .form-group.has-feedback
             input.form-control(type='number' placeholder='Registration No.' name='reg' required)
