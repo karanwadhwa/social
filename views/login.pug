@@ -28,11 +28,16 @@ html
           h4 Error!
             i.icon.fa.fa-warning
             |  #{error.msg}
+    #callout.message.callout.callout-info(style = 'display: none')
+      h4
+        i.icon.fa.fa-info-circle
+        |  Forgot Password!
+      p Unfortunately at this stage the only way to recover a lost password is by contacting the Administrator.
+
     .login-box.flex-container
       .login-logo
           b #{title}
           | Login
-      // /.login-logo
       .login-box-body
         p.login-box-msg Sign in to start your session
         form(action='/auth/login', method='POST')
@@ -44,7 +49,7 @@ html
             span.glyphicon.glyphicon-lock.form-control-feedback
           button.btn.btn-primary.btn-block.btn-flat(type='submit') Sign In
         br
-        a(href='#') Forgot Password
+        a(href="#" onclick="toggleVisibility('callout');") Forgot Password
         br
         a.text-center(href='/auth/register') Register
 
