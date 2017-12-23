@@ -89,8 +89,11 @@ app.use(passport.session());
 
 // Home route
 app.get('/', (req, res) => {
-  res.render('index', {
-    title: variables.title
+  res.render('home', {
+    title: variables.title,
+    username: 'Karan Wadhwa',
+    pageHeader: 'Home'
+
   });
 });
 
