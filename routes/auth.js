@@ -18,8 +18,18 @@ router.get('/login', (req, res) => {
   });
 });
 
+function capitalize(val){
+  return (val).charAt(0).toUpperCase() + (val).slice(1).toLowerCase();
+}
+
 // Login Process
 router.post('/login', function(req, res, next){
+  User.findOne({reg:req.body.reg}, function(err, user) {
+    if(err) throw err;
+    if(user){
+      req.session.username = capitalize(user.fname) + ' ' + capitalize(user.lname);
+    }
+  });
   passport.authenticate('local', {
     successRedirect:'/',
     failureRedirect:'/auth/login',

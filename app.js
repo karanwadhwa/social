@@ -6,11 +6,14 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const expressValidator = require('express-validator');
 const passport = require('passport');
+const bluebird = require('bluebird');
 
 const variables = require('./variables');
 const config = require('./config/database');
 
 // Mongo connection
+// Mongoose promise library is deprecated using bluebird instead
+mongoose.Promise = bluebird;
 // changed mongoose.connect('blahblah') to connection.openUri('blahblah') because of a deprecationWarning
 // check this thread for more info  https://github.com/Automattic/mongoose/issues/5399
 // lol switched it back to connect and added useMongoClient no idea what it does but gets rid of the warning
@@ -89,12 +92,15 @@ app.use(passport.session());
 
 // Home route
 app.get('/', (req, res) => {
-  res.render('home', {
-    title: variables.title,
-    username: 'Karan Wadhwa',
-    pageHeader: 'Home'
-
-  });
+    res.render('home', {
+      name: variables.name,
+      title: variables.title,
+      username: req.session.username,
+      pageHeader: 'Home',
+    });
+    // resetting session.username to null after use
+    // but i might not want to do that
+    //req.session.username = null;
 });
 
 // Route Files
