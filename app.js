@@ -99,7 +99,7 @@ app.get('/', (req, res) => {
       pageHeader: 'Home',
     });
     // resetting session.username to null after use
-    // but i might not want to do that
+    // but i might not want to do that just yet
     //req.session.username = null;
 });
 
