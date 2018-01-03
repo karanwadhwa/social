@@ -89,6 +89,12 @@ require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Enable global user variable for all URLs
+app.get('*', (req,res,next) => {
+  res.locals.user = req.user || null;
+  next();
+});
+
 
 // Home route
 app.get('/', (req, res) => {
