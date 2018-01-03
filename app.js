@@ -96,8 +96,7 @@ app.get('*', (req,res,next) => {
 });
 
 // Home route
-app.get('/', (req, res) => {
-
+app.get('/', ensureAuthenticated, (req, res) => {
   res.render('home', {
     name: variables.name,
     title: variables.title,
@@ -108,6 +107,17 @@ app.get('/', (req, res) => {
   // but i might not want to do that just yet
   //req.session.username = null;
 });
+
+// Access Control
+function ensureAuthenticated(req, res, next) {
+  if(req.isAuthenticated()) {
+    return next();
+  }
+  else {
+    req.flash('error', 'You need to be logged in to access this page');
+    res.redirect('/auth/login');
+  }
+}
 
 // Route Files
 const authRoute = require('./routes/auth');
