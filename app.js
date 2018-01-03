@@ -95,18 +95,18 @@ app.get('*', (req,res,next) => {
   next();
 });
 
-
 // Home route
 app.get('/', (req, res) => {
-    res.render('home', {
-      name: variables.name,
-      title: variables.title,
-      username: req.session.username,
-      pageHeader: 'Home',
-    });
-    // resetting session.username to null after use
-    // but i might not want to do that just yet
-    //req.session.username = null;
+
+  res.render('home', {
+    name: variables.name,
+    title: variables.title,
+    username: req.session.username,
+    pageHeader: 'Home',
+  });
+  // resetting session.username to null after use
+  // but i might not want to do that just yet
+  //req.session.username = null;
 });
 
 // Route Files
