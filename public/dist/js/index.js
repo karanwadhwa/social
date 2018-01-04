@@ -13,3 +13,16 @@ function toggleVisibility(id) {
      console.log('block');
   }
 }
+
+// Select2 branch
+$(document).ready(function() {
+  $('.select2').select2({
+    minimumResultsForSearch: Infinity
+  });
+});
+
+$(document).ready(function() {
+  $('.select2-multiple').select2({
+    placeholder: 'Tags'
+  });
+});

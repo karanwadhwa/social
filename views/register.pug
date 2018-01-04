@@ -19,7 +19,7 @@ html
     // Google Font
     link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900')
     // Select2 css cdn
-    link(href='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css', rel='stylesheet')
+    link(href='/dist/css/select2.css', rel='stylesheet')
 
 
 
@@ -61,6 +61,29 @@ html
           .form-group.has-feedback
             input.form-control(type='password' placeholder='Confirm Password' name='password2' required)
             span.glyphicon.glyphicon-log-in.form-control-feedback
+          .form-group
+            select.form-control.select2(style='width: 100%;')
+              option(value='' disabled selected) Branch
+              option(value='computers') Computers
+              option(value='it') Information Technology
+              option(value='electronics') Electronics
+              option(value='extc') Electronics and Telecommunication
+              option(value=null) NA
+          .form-group
+            select.form-control.select2(style='width: 100%;')
+              option(value='' disabled selected) User Type
+              option(value='student') Student
+              option(value='professor') Professor
+              option(value='staff') Staff
+          .form-group
+            select.form-control.select2-multiple(multiple='multiple', data-placeholder='Tags', style='width: 100%;')
+              option(value='admin') Admin
+              option(value='mod') Moderator
+              option(value='hod') H.O.D
+              option(value='cr') C.R
+              option(value='council1') Student Council 1
+              option(value='council2') Student Council 2
+              option(value='council3') Student Council 3
           button.btn.btn-primary.btn-block.btn-flat(type='submit') Register
 
         br
