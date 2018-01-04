@@ -1250,7 +1250,8 @@
  }
  .form-control:not(select) {
    -webkit-appearance: none;
-   -moz-appearance: none;
+   -moz-appearance: textfield;
+   /* -moz-appearance: none; */
    appearance: none;
  }
  .form-group.has-success label {
