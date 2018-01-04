@@ -20,6 +20,18 @@ var userSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  type: {
+    type: String,
+    required: true
+  },
+  branch: {
+    type: String,
+    required: true,
+    default: null
+  },
+  tags: {
+    type: [String]
   }
 });
 
