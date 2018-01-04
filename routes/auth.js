@@ -53,6 +53,8 @@ router.post('/register', (req, res) => {
   req.checkBody('password', 'Please enter a password').notEmpty();
   req.checkBody('password', 'A minimum password length of 6 characters is required').notEmpty().isLength({min:6});
   req.checkBody('password2', 'Your Passwords do not match').equals(req.body.password);
+  req.checkBody('branch', 'Please Select your Branch, if not a student select NA').notEmpty();
+  req.checkBody('type', 'Please select your user type - Student/Professor/Staff').notEmpty();
 
   // Generate newUser
   // fname, lname and email are converted to lowercase
@@ -62,7 +64,10 @@ router.post('/register', (req, res) => {
     lname : (req.body.lname).toLowerCase(),
     email : (req.body.email).toLowerCase(),
     reg : req.body.reg,
-    password : req.body.password
+    password : req.body.password,
+    branch: req.body.branch,
+    type: req.body.type,
+    tags: req.body.tags
   });
 
   // Get validationErrors

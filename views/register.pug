@@ -62,23 +62,23 @@ html
             input.form-control(type='password' placeholder='Confirm Password' name='password2' required)
             span.glyphicon.glyphicon-log-in.form-control-feedback
           .form-group
-            select.form-control.select2(style='width: 100%;')
+            select.form-control.select2(style='width: 100%;' name='branch' required)
               option(value='' disabled selected) Branch
               option(value='computers') Computers
               option(value='it') Information Technology
               option(value='electronics') Electronics
               option(value='extc') Electronics and Telecommunication
-              option(value=null) NA
+              option(value='na') NA
           .form-group
-            select.form-control.select2(style='width: 100%;')
+            select.form-control.select2(style='width: 100%;' name='type' required)
               option(value='' disabled selected) User Type
               option(value='student') Student
               option(value='professor') Professor
               option(value='staff') Staff
           .form-group
-            select.form-control.select2-multiple(multiple='multiple', data-placeholder='Tags', style='width: 100%;')
+            select.form-control.select2-multiple(multiple='multiple', data-placeholder='Tags', style='width: 100%;' name='tags')
               option(value='admin') Admin
-              option(value='mod') Moderator
+              option(value='moderator') Moderator
               option(value='hod') H.O.D
               option(value='cr') C.R
               option(value='council1') Student Council 1

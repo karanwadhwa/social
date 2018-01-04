@@ -21,14 +21,14 @@ var userSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  type: {
-    type: String,
-    required: true
-  },
   branch: {
     type: String,
     required: true,
-    default: null
+    default: 'na'
+  },
+  type: {
+    type: String,
+    required: true
   },
   tags: {
     type: [String]
