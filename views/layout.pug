@@ -125,13 +125,13 @@ html
                 // Menu Toggle Button
                 a.dropdown-toggle(href='#', data-toggle='dropdown')
                   // The user image in the navbar
-                  img.user-image(src='dist/img/user2-160x160.jpg', alt='User Image')
+                  img.user-image(src=dpURL, alt='User Image')
                   // hidden-xs hides the username on small devices so only the image appears.
                   span.hidden-xs #{username}
                 ul.dropdown-menu
                   // The user image in the menu
                   li.user-header
-                    img.img-circle(src='dist/img/user2-160x160.jpg', alt='User Image')
+                    img.img-circle(src=dpURL, alt='User Image')
                     p
                       | #{username}
                       | #{userDescription}
@@ -151,7 +151,7 @@ html
           // Sidebar user panel (optional)
           .user-panel
             .pull-left.image
-              img.img-circle(src='dist/img/user2-160x160.jpg', alt='User Image')
+              img.img-circle(src=dpURL, alt='User Image')
             .pull-left.info
               p.capitalize #{username}
               // Status
@@ -172,23 +172,27 @@ html
             // Optionally, you can add icons to the links
             li.active
               a(href='#')
-                i.fa.fa-link
-                span Link
+                i.fa.fa-home
+                span Home
             li
               a(href='#')
-                i.fa.fa-link
-                span Another Link
+                i.fa.fa-tachometer
+                span Dashboard
+            li
+              a(href='#')
+                i.fa.fa-mortar-board
+                span Placement Cell
             li.treeview
               a(href='#')
                 i.fa.fa-link
-                span Multilevel
+                span Groups
                 span.pull-right-container
                   i.fa.fa-angle-left.pull-right
               ul.treeview-menu
                 li
-                  a(href='#') Link in level 2
+                  a(href='#') Group 1
                 li
-                  a(href='#') Link in level 2
+                  a(href='#') Group 2
           // /.sidebar-menu
         // /.sidebar
       // Content Wrapper. Contains page content

@@ -9,6 +9,11 @@ var userSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  dpURL: {
+    type: String,
+    default: '/dist/img/poo.png',
+    required: true
+  },
   email: {
     type: String,
     required: true
