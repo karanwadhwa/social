@@ -151,6 +151,16 @@ router.get('/logout', (req, res) => {
   req.logout();
   req.flash('success', "You have Logged Out");
   res.redirect('/auth/login');
+
+  // Reset variables saved in session
+  req.session.username = null;
+  req.session.dpURL = null;
+  req.session.user = null;
+  res.locals.user = null;
+
+  console.log('------ logout route -------');
+  console.log(req.session);
+  console.log(res.locals.user);
 });
 
 

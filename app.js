@@ -104,8 +104,8 @@ app.get('/', ensureAuthenticated, (req, res) => {
     dpURL: res.locals.user.dpURL,
     pageHeader: 'Home',
   });
-  console.log(req.session);
-  console.log(res.locals.user);
+  //console.log(req.session);
+  //console.log(res.locals.user);
   // resetting session.username to null after use
   // but i might not want to do that just yet
   //req.session.username = null;

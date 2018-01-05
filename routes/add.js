@@ -16,6 +16,7 @@ router.get('/post', ensureAuthenticated, (req, res) => {
     dpURL: res.locals.user.dpURL,
     pageHeader: 'New Post',
   });
+  console.log('------add route------');
   console.log(req.session);
   console.log(res.locals.user);
   // resetting session.username to null after use
