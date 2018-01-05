@@ -1,19 +1,26 @@
 extends layout
 
 block content
+  if errors
+    script( console.log(errors);)
+    .message
+      div(class = 'alert alert-dismissible alert-danger' style='margin-top: 40px;')
+        button.close(type='button', data-dismiss='alert', aria-hidden='true') ×
+        h4
+          i.icon.fa.fa-warning
+          | Error!
+        |  #{errors[0].msg}
   .box.box-info
     .box-header.with-border
       h3.box-title New Post
-    // /.box-header
-    // form start
-    form.form-horizontal
+    form.form-horizontal(action='/add/post', method='POST')
       .box-body.post-body
         .form-group
-          label.col-sm-2.control-label(for='inputEmail3') Author
+          label.col-sm-2.control-label Author
           .col-sm-10
             strong.form-control(style='padding-left: 0px; border: none;')  #{author}
         .form-group
-          label.col-sm-2.control-label(for='inputEmail3') Audience
+          label.col-sm-2.control-label Audience
           .col-sm-10
             select.form-control.select2-multiple-audience(multiple='multiple', style='width: 100%;' name='audience')
               option(value='public') Public
@@ -26,16 +33,14 @@ block content
               option(value='csi') CSI Members
               option(value='iste') ISTE Members
         .form-group
-          label.col-sm-2.control-label(for='inputEmail3') Title
+          label.col-sm-2.control-label Title
           .col-sm-10
-            input#inputEmail3.form-control(type='text', placeholder='Post Title')
+            input#inputEmail3.form-control(type='text', placeholder='Post Title' name='title' required)
         .form-group
-          label.col-sm-2.control-label(for='inputPassword3') Body
+          label.col-sm-2.control-label Body
           .col-sm-10
-            textarea.form-control(rows='10', placeholder='Post Body')
+            textarea.form-control(rows='10', placeholder='Post Body' name='body' required)
 
-      // /.box-body
       .box-footer
-        button.btn.btn-default(type='submit') Cancel
-        button.btn.btn-info.pull-right(type='submit') Sign in
-      // /.box-footer
+        button.btn.btn-default(type='reset') Cancel
+        button.btn.btn-info.pull-right(type='submit') Submit

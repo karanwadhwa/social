@@ -29,6 +29,6 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   $('.select2-multiple-audience').select2({
-    placeholder: 'Post Audience'
+    placeholder: 'Post Audience (default: Public)'
   });
 });

@@ -30,6 +30,10 @@ router.post('/login', function(req, res, next){
       req.session.username = capitalize(user.fname) + ' ' + capitalize(user.lname);
       req.session.dpURL = user.dpURL;
       req.session.user = user;
+      console.log('------Login route------');
+      console.log(req.session);
+      console.log('============');
+      console.log(res.locals.user);
     }
   });
   passport.authenticate('local', {
