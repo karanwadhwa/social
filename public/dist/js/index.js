@@ -22,7 +22,13 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-  $('.select2-multiple').select2({
+  $('.select2-multiple-tags').select2({
     placeholder: 'Tags'
+  });
+});
+
+$(document).ready(function() {
+  $('.select2-multiple-audience').select2({
+    placeholder: 'Post Audience'
   });
 });

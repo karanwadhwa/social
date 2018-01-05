@@ -1,5 +1,41 @@
 extends layout
 
 block content
-  h4
-   | New Post
+  .box.box-info
+    .box-header.with-border
+      h3.box-title New Post
+    // /.box-header
+    // form start
+    form.form-horizontal
+      .box-body.post-body
+        .form-group
+          label.col-sm-2.control-label(for='inputEmail3') Author
+          .col-sm-10
+            strong.form-control(style='padding-left: 0px; border: none;')  #{author}
+        .form-group
+          label.col-sm-2.control-label(for='inputEmail3') Audience
+          .col-sm-10
+            select.form-control.select2-multiple-audience(multiple='multiple', style='width: 100%;' name='audience')
+              option(value='public') Public
+              option(value='student') Students
+              option(value='professor') Professors
+              option(value='staff') Staff
+              option(value='cr') Class Representatives
+              option(value='student_council') Student Council
+              option(value='ieee') IEEE Members
+              option(value='csi') CSI Members
+              option(value='iste') ISTE Members
+        .form-group
+          label.col-sm-2.control-label(for='inputEmail3') Title
+          .col-sm-10
+            input#inputEmail3.form-control(type='text', placeholder='Post Title')
+        .form-group
+          label.col-sm-2.control-label(for='inputPassword3') Body
+          .col-sm-10
+            textarea.form-control(rows='10', placeholder='Post Body')
+
+      // /.box-body
+      .box-footer
+        button.btn.btn-default(type='submit') Cancel
+        button.btn.btn-info.pull-right(type='submit') Sign in
+      // /.box-footer

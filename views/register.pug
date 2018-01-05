@@ -76,7 +76,7 @@ html
               option(value='professor') Professor
               option(value='staff') Staff
           .form-group
-            select.form-control.select2-multiple(multiple='multiple', data-placeholder='Tags', style='width: 100%;' name='tags')
+            select.form-control.select2-multiple-tags(multiple='multiple', data-placeholder='Tags', style='width: 100%;' name='tags')
               option(value='admin') Admin
               option(value='moderator') Moderator
               option(value='hod') H.O.D
@@ -98,9 +98,10 @@ html
     script(src='/bower_components/jquery/dist/jquery.min.js')
     // Bootstrap 3.3.7
     script(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
-    // Custom js
-    script(src='/dist/js/index.js')
     // AdminLTE script
     script(src='/bower_components/dist/js/adminlte.js')
     // Select2 js cdn
     script(src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js')
+    // Custom js
+    script(src='/dist/js/index.js')
+

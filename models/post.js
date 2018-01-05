@@ -1,12 +1,23 @@
 const mongoose = require('mongoose');
 
 var postSchema = mongoose.Schema({
-  authorID: {
-    type: String,
-    required: true
+  author: {
+    name: {
+      type: String,
+      required: true
+    },
+    id: {
+      type: String,
+      required: true
+    },
+    reg: {
+      type: String,
+      required: true
+    }
   },
   date: {
     type: String,
+    default: Date.now,
     required: true
   },
   title: {
@@ -23,8 +34,8 @@ var postSchema = mongoose.Schema({
   attachments: {
     type: String
   },
-  sharedTo: {
-    type: String,
+  audience: {
+    type: [String],
     required: true,
     default: 'public'
   }

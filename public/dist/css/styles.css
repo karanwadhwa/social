@@ -51,3 +51,9 @@
     width: 92% !important;
   }
 }
+
+@media (min-width: 1000px) {
+  .post-body {
+    padding-right: 100px;
+  }
+}
