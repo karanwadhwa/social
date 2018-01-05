@@ -28,6 +28,7 @@ router.post('/login', function(req, res, next){
     if(err) throw err;
     if(user){
       req.session.username = capitalize(user.fname) + ' ' + capitalize(user.lname);
+      req.session.dpURL = user.dpURL;
       req.session.user = user;
     }
   });

@@ -101,9 +101,11 @@ app.get('/', ensureAuthenticated, (req, res) => {
     name: variables.name,
     title: variables.title,
     username: req.session.username,
-    dpURL: req.session.user.dpURL,
+    dpURL: res.locals.user.dpURL,
     pageHeader: 'Home',
   });
+  console.log(req.session);
+  console.log(res.locals.user);
   // resetting session.username to null after use
   // but i might not want to do that just yet
   //req.session.username = null;
@@ -122,8 +124,10 @@ function ensureAuthenticated(req, res, next) {
 
 // Route Files
 const authRoute = require('./routes/auth');
+const addRoute = require('./routes/add');
 
 app.use('/auth', authRoute);
+app.use('/add', addRoute);
 
 // Start server
 app.listen(port, () => {
