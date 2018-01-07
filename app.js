@@ -36,6 +36,7 @@ const app = express();
 
 // Import Models
 let User = require('./models/user');
+let Post = require('./models/post');
 
 // Load view engine
 app.set('views', path.join(__dirname, 'views'));
@@ -97,14 +98,25 @@ app.get('*', (req,res,next) => {
 
 // Home route
 app.get('/', ensureAuthenticated, (req, res) => {
-  res.render('home', {
-    name: variables.name,
-    title: variables.title,
-    username: req.session.username,
-    dpURL: res.locals.user.dpURL || req.session.user.dpURL,
-    pageHeader: 'Home',
-    pageTitle: 'Home'
+  Post.find({}, (err, posts) => {
+    if(err) {
+      console.log(err);
+    }
+    else {
+      console.log(posts);
+      console.log(posts[10].date.toLocaleString());
+      res.render('home', {
+        name: variables.name,
+        title: variables.title,
+        username: req.session.username,
+        dpURL: res.locals.user.dpURL || req.session.user.dpURL,
+        pageHeader: 'Recent Updates',
+        pageTitle: 'Home',
+        posts: posts
+      });
+    }
   });
+
   console.log('------Home route------');
   console.log(req.session);
   console.log('============');

@@ -21,8 +21,7 @@ var postSchema = mongoose.Schema({
     required: true
   },
   title: {
-    type: String,
-    required: true
+    type: String
   },
   body: {
     type: String,
@@ -38,7 +37,26 @@ var postSchema = mongoose.Schema({
     type: [String],
     required: true,
     default: 'public'
-  }
+  },
+/*   stats: {
+    likes: [
+      users: {
+        id: String,
+        name: String,
+        reg: String
+      }
+    ],
+    comments: [{
+      author: {
+        type: String,
+        required: true
+      },
+      comment: {
+        type: String,
+        required: true
+      }
+    }]
+  } */
 });
 
 var Post = module.exports = mongoose.model('Post', postSchema);
