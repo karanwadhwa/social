@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const variables = require('../variables');
 
 var userSchema = mongoose.Schema({
   fname: {
@@ -11,7 +12,7 @@ var userSchema = mongoose.Schema({
   },
   dpURL: {
     type: String,
-    default: '/dist/img/poo.png',
+    default: variables.defaultDpURL,
     required: true
   },
   email: {
