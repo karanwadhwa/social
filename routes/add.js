@@ -15,7 +15,8 @@ router.get('/post', ensureAuthenticated, (req, res) => {
     title: variables.title,
     username: req.session.username,
     dpURL: req.session.user.dpURL,
-    author: req.session.username
+    author: req.session.username,
+    pageTitle: 'New Post'
   });
   console.log('------add/post GET route------');
   console.log(req.session);
@@ -43,6 +44,7 @@ router.post('/post', (req,res) => {
       id: req.session.user._id,
       reg: req.session.user.reg
     },
+    date : new Date(),
     title : req.body.title,
     body : req.body.body,
     audience: req.body.audience

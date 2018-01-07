@@ -103,6 +103,7 @@ app.get('/', ensureAuthenticated, (req, res) => {
     username: req.session.username,
     dpURL: res.locals.user.dpURL || req.session.user.dpURL,
     pageHeader: 'Home',
+    pageTitle: 'Home'
   });
   console.log('------Home route------');
   console.log(req.session);

@@ -14,7 +14,7 @@ let User = require('../models/user');
 // Login GET route
 router.get('/login', (req, res) => {
   res.render('login', {
-    title: variables.title
+    title: variables.title,
   });
 });
 
@@ -27,7 +27,12 @@ router.post('/login', function(req, res, next){
   User.findOne({reg:req.body.reg}, function(err, user) {
     if(err) throw err;
     if(user){
-      req.session.username = capitalize(user.fname) + ' ' + capitalize(user.lname);
+      if(user.reg == 00000) {
+        req.session.username = (user.fname).toUpperCase();
+        console.log(req.session.username);
+      } else {
+        req.session.username = capitalize(user.fname) + ' ' + capitalize(user.lname);
+      }
       req.session.dpURL = user.dpURL;
       req.session.user = user;
       console.log('------Login route------');
