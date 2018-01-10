@@ -9,7 +9,7 @@ let User = require('../models/user');
 let Post = require('../models/post');
 
 // newPost GET route
-router.get('/post', ensureAuthenticated, (req, res) => {
+router.get('/post', anyUserLoggedIn, (req, res) => {
   res.render('newPost', {
     name: variables.name,
     title: variables.title,
@@ -80,8 +80,10 @@ router.post('/post', (req,res) => {
 });
 
 
+
 // Access Control
-function ensureAuthenticated(req, res, next) {
+// ensures that *A* user - ANY user is logged in
+function anyUserLoggedIn(req, res, next) {
   if(req.isAuthenticated()) {
     return next();
   }

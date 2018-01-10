@@ -55,7 +55,8 @@ app.use(bodyParser.json())
 app.use(session({
   secret: 'keyboard cat',
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: false,
+  //cookie: { secure: true }
 }));
 
 //Express Messages Middleware

@@ -24,6 +24,8 @@ function capitalize(val){
 
 // Login Process
 router.post('/login', function(req, res, next){
+  // Definitely not the most elegant way but I'll come back to this later.
+  // Finds a user with the entered details and save their details in session
   User.findOne({reg:req.body.reg}, (err, user) => {
     if(err) throw err;
     if(user){
@@ -39,13 +41,19 @@ router.post('/login', function(req, res, next){
       console.log(req.session);
       console.log('============');
       console.log(res.locals.user);
+
+      // Actual login authentication
+      // Including this within the findOne func since its async
+      // and in a few cases login went in before the session variables were set
+      // definitely not the best way could've used promises or callbacks
+      // meh.. it works for now :)
+      passport.authenticate('local', {
+        successRedirect:'/',
+        failureRedirect:'/auth/login',
+        failureFlash: true
+      })(req, res, next);
     }
   });
-  passport.authenticate('local', {
-    successRedirect:'/',
-    failureRedirect:'/auth/login',
-    failureFlash: true
-  })(req, res, next);
 });
 
 // Register GET route
@@ -158,18 +166,20 @@ router.post('/register', (req, res) => {
 // Logout Route
 router.get('/logout', (req, res) => {
   req.logout();
-  req.flash('success', "You have Logged Out");
-  res.redirect('/auth/login');
-
+  //res.status(200).clearCookie('connect.sid',{path: '/'});
+  //req.flash('success', "You have Logged Out");
   // Reset variables saved in session
+  // - (not needed anymore since session is being destroyed)
+  // leaving it in anyway for redundancy
   req.session.username = null;
   req.session.dpURL = null;
   req.session.user = null;
   res.locals.user = null;
 
-  console.log('------ logout route -------');
-  console.log(req.session);
-  console.log(res.locals.user);
+  req.session.destroy(function() {
+    res.clearCookie('connect.sid');
+    res.redirect('/auth/login');
+  });
 });
 
 

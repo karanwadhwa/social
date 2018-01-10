@@ -10,7 +10,7 @@ let User = require('../models/user');
 let Post = require('../models/post');
 
 // Home route
-router.get('/', ensureAuthenticated, (req, res) => {
+router.get('/', anyUserLoggedIn, (req, res) => {
   Post.find({}, (err, posts) => {
     if(err) {
       console.log(err);
@@ -19,11 +19,11 @@ router.get('/', ensureAuthenticated, (req, res) => {
       // fetch authors latest dpURL and save it in the posts array before parsing
         var promises = posts.map(function(post){
           return new Promise(function(resolve, reject){
-            User.findOne({reg: post.author.reg}, (err, user) => {
+            User.findOne({reg: post.author.reg}, (err, usr) => {
               if (err) { return reject(err); }
-              if (user) {
-                post.author.dpURL = user.dpURL;
-                //Post.update({'author.reg': user.reg}, {$set:{'author.dpURL': user.dpURL}}, {multi: true});
+              if (usr) {
+                post.author.dpURL = usr.dpURL;
+                //Post.update({'author.reg': usr.reg}, {$set:{'author.dpURL': usr.dpURL}}, {multi: true});
                 resolve();
               }
             });
@@ -36,7 +36,7 @@ router.get('/', ensureAuthenticated, (req, res) => {
               name: variables.name,
               title: variables.title,
               username: req.session.username,
-              dpURL: res.locals.user.dpURL || req.session.user.dpURL,
+              dpURL: req.session.user.dpURL,
               pageHeader: 'Recent Updates',
               pageTitle: 'Home',
               posts: posts.reverse()
@@ -50,8 +50,11 @@ router.get('/', ensureAuthenticated, (req, res) => {
   //req.session.username = null;
 });
 
+
+
 // Access Control
-function ensureAuthenticated(req, res, next) {
+// ensures that *A* user - ANY user is logged in
+function anyUserLoggedIn(req, res, next) {
   if(req.isAuthenticated()) {
     return next();
   }
