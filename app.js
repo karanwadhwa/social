@@ -103,24 +103,35 @@ app.get('/', ensureAuthenticated, (req, res) => {
       console.log(err);
     }
     else {
-      console.log(posts);
-      console.log(posts[10].date.toLocaleString());
-      res.render('home', {
-        name: variables.name,
-        title: variables.title,
-        username: req.session.username,
-        dpURL: res.locals.user.dpURL || req.session.user.dpURL,
-        pageHeader: 'Recent Updates',
-        pageTitle: 'Home',
-        posts: posts
-      });
+      // fetch authors latest dpURL and save it in the posts array before parsing
+        var promises = posts.map(function(post){
+          return new Promise(function(resolve, reject){
+            User.findOne({reg: post.author.reg}, (err, user) => {
+              if (err) { return reject(err); }
+              if (user) {
+                post.author.dpURL = user.dpURL;
+                //Post.update({'author.reg': user.reg}, {$set:{'author.dpURL': user.dpURL}}, {multi: true});
+                resolve();
+              }
+            });
+          });
+        });
+        // waits for posts.author.dpURL to update before rendering the page
+        Promise.all(promises)
+          .then(() => {
+            res.render('home', {
+              name: variables.name,
+              title: variables.title,
+              username: req.session.username,
+              dpURL: res.locals.user.dpURL || req.session.user.dpURL,
+              pageHeader: 'Recent Updates',
+              pageTitle: 'Home',
+              posts: posts.reverse()
+            });
+          })
+          .catch(console.error);
     }
   });
-
-  console.log('------Home route------');
-  console.log(req.session);
-  console.log('============');
-  console.log(res.locals.user);
   // resetting session.username to null after use
   // but i might not want to do that just yet
   //req.session.username = null;

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const variables = require('../variables');
 
 var postSchema = mongoose.Schema({
   author: {
@@ -12,6 +13,11 @@ var postSchema = mongoose.Schema({
     },
     reg: {
       type: String,
+      required: true
+    },
+    dpURL: {
+      type: String,
+      default: variables.defaultDpURL,
       required: true
     }
   },

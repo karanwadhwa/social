@@ -42,7 +42,8 @@ router.post('/post', (req,res) => {
     author: {
       name: req.session.username,
       id: req.session.user._id,
-      reg: req.session.user.reg
+      reg: req.session.user.reg,
+      dpURL: req.session.user.dpURL
     },
     date : new Date(),
     title : req.body.title,

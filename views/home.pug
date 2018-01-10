@@ -8,18 +8,19 @@ block content
         .box.box-widget
           .box-header.with-border
             .user-block
-              img.img-circle(src=dpURL, alt='Post Image')
+              img.img-circle(src=post.author.dpURL, alt='Post Image')
               span.username
                 a(href='#') #{post.author.name}
               span.description
                 | #{post.date.toLocaleString('en-US', {hour:'numeric', minute:'numeric', hour12:true})}
+                | on #{post.date.toLocaleString('en-US', {year: 'numeric', month: 'short', day: 'numeric' })}
                 br
                 | Audience: #{post.audience}
             // /.user-block
           // /.box-header
           .box-body
             if post.title
-              span(style='text-align: center; font-size: 22px; font-weight: 600;') #{post.title}
+              span(style='text-align: center; font-size: 22px; font-weight: 600;') #{post.title} i is #{i}
             if postImg
               img.img-responsive.pad(src=postImg, alt=null)
             .post-body
@@ -27,7 +28,8 @@ block content
             button.btn.btn-default.btn-xs(type='button')
               i.fa.fa-thumbs-o-up
               |  Like
-            span.pull-right.text-muted 127 likes - 3 comments
+            span.pull-right.text-muted
+              | 127 likes   3 comments
           // /.box-body
       .col-xs-0.col-sm-0.col-md-0.col-lg-1.col-xl-2.grid-item
 

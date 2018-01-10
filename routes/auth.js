@@ -24,7 +24,7 @@ function capitalize(val){
 
 // Login Process
 router.post('/login', function(req, res, next){
-  User.findOne({reg:req.body.reg}, function(err, user) {
+  User.findOne({reg:req.body.reg}, (err, user) => {
     if(err) throw err;
     if(user){
       if(user.reg == 00000) {
