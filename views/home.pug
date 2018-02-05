@@ -18,9 +18,11 @@ block content
                 | Audience: #{post.audience}
             // /.user-block
           // /.box-header
-          .box-body
+          .box-body(style='position:relative;')
+            a(href=`/posts/${post._id}`)
+              span(style='position:absolute; width:100%; height:100%; top:0; left: 0; z-index: 1;')
             if post.title
-              span(style='text-align: center; font-size: 22px; font-weight: 600;') #{post.title} i is #{i}
+              span(style='text-align: center; font-size: 22px; font-weight: 600;') #{post.title}
             if postImg
               img.img-responsive.pad(src=postImg, alt=null)
             .post-body

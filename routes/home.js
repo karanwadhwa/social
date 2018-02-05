@@ -50,6 +50,26 @@ router.get('/', anyUserLoggedIn, (req, res) => {
   //req.session.username = null;
 });
 
+// Single Post
+router.get('/posts/:id', anyUserLoggedIn, (req, res) => {
+  Post.findById(req.params.id, (err, post) => {
+    if(err) {
+      console.log(err);
+    }
+    else {
+      res.render('post', {
+        name: variables.name,
+        title: variables.title,
+        username: req.session.username,
+        dpURL: req.session.user.dpURL,
+        post: post,
+      });
+    }
+  });
+  // resetting session.username to null after use
+  // but i might not want to do that just yet
+  //req.session.username = null;
+});
 
 
 // Access Control
