@@ -52,6 +52,10 @@
   }
 }
 
+.post-body {
+  padding-bottom: 20px;
+}
+
 @media (min-width: 1000px) {
   .post-body {
     padding-right: 100px;

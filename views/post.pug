@@ -27,3 +27,23 @@ block content
       span.pull-right.text-muted
         | 127 likes   3 comments
     // /.box-body
+    if comments
+      .box-footer.box-comments
+        each comment, i in comments
+          .box-comment
+            // User image
+            img.img-circle.img-sm(src=comment.dpURL)
+            .comment-text
+              span.username
+                | comment.author
+                span.text-muted.pull-right 8:03 PM Today
+              // /.username
+              | #{comment.body}
+            // /.comment-text
+          // /.box-comment
+    .box-footer
+      form(action='/posts', method='post')
+        img.img-responsive.img-circle.img-sm(src=dpURL, alt=username)
+        // .img-push can be used to add margin to elements next to floating images
+        .img-push
+          input.form-control.input-sm(type='text', placeholder='Press enter to post comment')

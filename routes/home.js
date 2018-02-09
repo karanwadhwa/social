@@ -41,6 +41,7 @@ router.get('/', anyUserLoggedIn, (req, res) => {
               pageTitle: 'Home',
               posts: posts.reverse()
             });
+            console.log(posts.reverse());
           })
           .catch(console.error);
     }
