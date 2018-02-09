@@ -11,7 +11,7 @@ let Post = require('../models/post');
 
 // Home route
 router.get('/', anyUserLoggedIn, (req, res) => {
-  Post.find({}, (err, posts) => {
+  Post.find({}).sort('-date').exec((err, posts) => {
     if(err) {
       console.log(err);
     }
@@ -39,9 +39,8 @@ router.get('/', anyUserLoggedIn, (req, res) => {
               dpURL: req.session.user.dpURL,
               pageHeader: 'Recent Updates',
               pageTitle: 'Home',
-              posts: posts.reverse()
+              posts: posts
             });
-            console.log(posts.reverse());
           })
           .catch(console.error);
     }
