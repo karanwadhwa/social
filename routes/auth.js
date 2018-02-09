@@ -26,7 +26,7 @@ function capitalize(val){
 router.post('/login', function(req, res, next){
   // Definitely not the most elegant way but I'll come back to this later.
   // Finds a user with the entered details and save their details in session
-  User.findOne({reg:req.body.reg}, (err, user) => {
+  User.findOne({reg:req.body.reg}).exec((err, user) => {
     if(err) throw err;
     if(user){
       if(user.reg == 00000) {
